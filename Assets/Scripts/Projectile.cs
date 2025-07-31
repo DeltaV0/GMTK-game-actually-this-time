@@ -9,20 +9,10 @@ public class Projectile : MonoBehaviour
     public Rigidbody2D rb;
 
     public ParticleSystem noiseparts;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //done = false;
-    }
 
     private void Awake()
     {
         done = false;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void FixedUpdate(){

@@ -38,12 +38,6 @@ public class Movement : MonoBehaviour
         innacuracy = 1;
         player = this;
     }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void Reset(){
         transform.position = spawnpoint.position;
@@ -59,6 +53,7 @@ public class Movement : MonoBehaviour
         //Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //body.velocity = input.normalized * speed;
         if(Input.GetMouseButton(0) && reloadTime <= 0){
+            //  two seconds
             reloadTime = 100;
             //timer = 4;
 
@@ -119,6 +114,7 @@ public class Movement : MonoBehaviour
             timer--;
         }*/
         if(reloadTime > 0){
+            //  called every 0.02 seconds (50 times per second)
             reloadTime--;
         }
         
