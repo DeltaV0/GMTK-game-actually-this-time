@@ -1,26 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Objective : MonoBehaviour
 {
-    public String nextlevelname;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string nextlevelname;
+    private bool complete = false;
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.name == "Me rn :3" && Cooldown <= 0){
-            //go to next level ig
+        if(col.gameObject.name == "Me rn :3" && !complete){
+            StartCoroutine(NextLevel());
         }
+    }
+
+    private IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(nextlevelname);
     }
 }

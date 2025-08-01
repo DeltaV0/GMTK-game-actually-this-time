@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     public bool seePlayer;
 
-    public lookatplayer lap;
+    public LookAtPlayer lap;
 
     public int movementupdatetimer;
 
@@ -42,11 +42,6 @@ public class Enemy : MonoBehaviour
         agent.updateUpAxis = false;
         agent.updateRotation = false;
         agent.updatePosition = true;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

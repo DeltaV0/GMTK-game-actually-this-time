@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lookatplayer : MonoBehaviour
+public class LookAtPlayer : MonoBehaviour
 {
     public bool seePlayer;
 
