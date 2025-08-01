@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
 
     public ParticleSystem noiseparts;
 
+    public AudioSource aud;
+
     private void Awake()
     {
         done = false;
@@ -20,6 +22,7 @@ public class Projectile : MonoBehaviour
             done = true;
             noiseparts.Play();
             for(int i = 0; i < Globals.globals.enemies.Length; i++){
+                    aud.Play();
                     int lm2 = LayerMask.GetMask("Enemy", "Walls");
                     //Vector2 pointBetween = Vector2.Lerp(transform.position, hit.point, 0.95f);
 			        RaycastHit2D hit2 = Physics2D.Linecast(transform.position, Globals.globals.enemies[i].transform.position, lm2);

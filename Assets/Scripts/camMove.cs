@@ -23,6 +23,8 @@ public class camMove : MonoBehaviour
     private void FixedUpdate()
     {
         //lerp to player position
+        if(!Globals.globals.reloading){
 		transform.position = Vector3.Lerp(transform.position, Vector3.Lerp(new Vector3(trans.position.x, trans.position.y, transform.position.z), Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.2f), 0.1f);
+        }
     }
 }

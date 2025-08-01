@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class Movement : MonoBehaviour
 {
     public static Movement player;
+
+    public Image HealthCircle;
+    public TMP_Text text;
 
     public Transform PlayerPos;
 
@@ -32,27 +38,64 @@ public class Movement : MonoBehaviour
 
     public Transform spawnpoint;
 
+    public int lives;// (customizable!!)
+
+    public ParticleSystem[] parts;
+
+    public Animator[] animator;
+
+    public AudioSource[] aud;
+
     private void Awake()
     {
+        player = this;
+        //Globals.globals.reloading = false;
         fireForce = 5;
         innacuracy = 1;
-        player = this;
+        
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
+        Debug.Log(Time.timeScale );
     }
 
     public void Reset(){
+        aud[0].Play();
+        animator[0].SetTrigger("respawn");
         transform.position = spawnpoint.position;
+        lives--;
+    }
+    public void reload(){
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
     // Update is called once per frame
     void Update()
     {
- 
+        HealthCircle.fillAmount = (float)((float)lives/ 5f);
+        text.text = lives + "";
+        if(lives == 0){
+            Debug.Log(Time.timeScale );
+            Globals.globals.reloading = true;
+            //Time.fixedDeltaTime = 10000f;
+            lives--;
+           // Time.timeScale = 1f;
+            Invoke("reload", 5f);
+            //reload of out of lives (or loops ig)
+            
+        }
+
+        if(Input.GetKeyDown("space")){
+            Vector2 aimDirection = mousePos - body.position;
+            body.AddForce(aimDirection * 10, ForceMode2D.Impulse);
+            parts[0].Play();
+        }
         float moveX = Input.GetAxisRaw ("Horizontal");
 		float moveY = Input.GetAxisRaw ("Vertical");
 		mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		moveDir = new Vector2 (moveX, moveY).normalized;
         //Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //body.velocity = input.normalized * speed;
-        if(Input.GetMouseButton(0) && reloadTime <= 0){
+        if(Input.GetMouseButton(0) && reloadTime <= 0 && !Globals.globals.reloading){
+            aud[1].Play();
             //  two seconds
             reloadTime = 100;
             //timer = 4;
@@ -105,10 +148,12 @@ public class Movement : MonoBehaviour
         Vector2 aimDirection = mousePos - body.position;
 		
 		float aimAngle = Mathf.Atan2 (aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-		body.rotation = aimAngle;
+		
 
+        if(!Globals.globals.reloading){
+        body.rotation = aimAngle;
         body.AddForce(moveDir * speed, ForceMode2D.Impulse);
-        
+        }
        /* if(timer > 0){
             bang.SetPosition (1, hitSpot);
             timer--;

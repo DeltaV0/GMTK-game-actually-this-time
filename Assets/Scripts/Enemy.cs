@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
 
     public UnityEngine.AI.NavMeshAgent agent;
 
+    public SpriteRenderer spr;
+
+    public bool disabled;
+
     public float moveSpeed;
 
     public bool seePlayer;
@@ -31,6 +35,7 @@ public class Enemy : MonoBehaviour
     public float fireForce;
 
     void OnEnable(){
+        disabled = false;
         sel = 0;
         chasing = false;
         movementupdatetimer = 100;
@@ -51,7 +56,7 @@ public class Enemy : MonoBehaviour
         //set this var for ease of use ig
         transform.position = new Vector3(transform.position.x, transform.position.y, 0); 
         //make sure player is aligned in case it isnt somehow
-        if(shoottimer <= 0 && seePlayer){
+        if(shoottimer <= 0 && seePlayer && !Globals.globals.reloading && !disabled){
             //shoot at player if can see player and no timer
             shoottimer = 100;
 
@@ -73,7 +78,7 @@ public class Enemy : MonoBehaviour
         if(shoottimer > 0 && seePlayer){
             shoottimer--;
         }
-
+        if(!Globals.globals.reloading && !disabled){
         //AI movement logic
         if(movementupdatetimer >= 0 && !chasing){
 
@@ -112,5 +117,9 @@ public class Enemy : MonoBehaviour
             //agent.isStopped = true;
             //agent.velocity = new Vector3(0, 0, 0);
         }
+    } else {
+        agent.isStopped = true;
+        agent.velocity = new Vector3(0, 0, 0);
+    }
     }
 }
