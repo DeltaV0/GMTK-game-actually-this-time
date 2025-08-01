@@ -46,6 +46,8 @@ public class Movement : MonoBehaviour
 
     public AudioSource[] aud;
 
+    public GameObject deathanim;
+
     private void Awake()
     {
         player = this;
@@ -59,10 +61,14 @@ public class Movement : MonoBehaviour
     }
 
     public void Reset(){
+        lives--;
+        if(lives > 0){
         aud[0].Play();
+        
         animator[0].SetTrigger("respawn");
         transform.position = spawnpoint.position;
-        lives--;
+        }
+        
     }
     public void reload(){
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
@@ -73,12 +79,14 @@ public class Movement : MonoBehaviour
         HealthCircle.fillAmount = (float)((float)lives/ 5f);
         text.text = lives + "";
         if(lives == 0){
+            aud[2].Stop();
+            deathanim.SetActive(true);
             Debug.Log(Time.timeScale );
             Globals.globals.reloading = true;
             //Time.fixedDeltaTime = 10000f;
             lives--;
            // Time.timeScale = 1f;
-            Invoke("reload", 5f);
+            Invoke("reload", 6f);
             //reload of out of lives (or loops ig)
             
         }

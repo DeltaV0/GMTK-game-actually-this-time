@@ -14,6 +14,8 @@ public class Button : MonoBehaviour
     public GameObject[] clickableTexts;
     private int currentClick = 0;
 
+    public AudioSource aud;
+
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +27,7 @@ public class Button : MonoBehaviour
                 clickableTexts[currentClick].SetActive(true);
             }
             if(Input.GetKeyDown("e")){
+                aud.Play();
                 //if E pressed, toggle
                 if (clickActions.Length > 0)
                 {

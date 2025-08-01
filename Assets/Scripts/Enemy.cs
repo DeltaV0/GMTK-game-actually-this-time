@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     public float innacuracy;
     
     public float fireForce;
+    
+    public AudioSource shootsound;
 
     void OnEnable(){
         disabled = false;
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour
         //make sure player is aligned in case it isnt somehow
         if(shoottimer <= 0 && seePlayer && !Globals.globals.reloading && !disabled){
             //shoot at player if can see player and no timer
+            shootsound.Play();
             shoottimer = 100;
 
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
