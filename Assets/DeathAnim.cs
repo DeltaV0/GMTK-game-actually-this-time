@@ -14,6 +14,8 @@ public class DeathAnim : MonoBehaviour
     public string[] texts;
 
     public bool deathanim;
+
+    public int linesb4loading;
     // Start is called before the first frame update
 
     private void Awake()
@@ -40,10 +42,10 @@ public class DeathAnim : MonoBehaviour
 
     IEnumerator anim(){
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < texts.Length; i++){
             for(int a = 0; a < texts[line].Length; a++){
                 text.text = text.text + texts[line][a];
-                if(line < 3){
+                if(line < linesb4loading){
                     yield return new WaitForSeconds(0.05f);
                 } else {
                     yield return new WaitForSeconds(0.25f);
