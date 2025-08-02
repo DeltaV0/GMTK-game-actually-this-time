@@ -45,6 +45,15 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updatePosition = true;
     }
+    void Start()
+    {
+        Globals.globals.enemies.Add(this);
+    }
+
+    void OnDestroy()
+    {
+        Globals.globals.enemies.Remove(this);
+    }
 
     // Update is called once per frame
     void Update()
@@ -58,7 +67,7 @@ public class Enemy : MonoBehaviour
             shootsound.Play();
             shoottimer = 100;
 
-            GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
             Vector2 aimDirection = new Vector2(transform.position.x, transform.position.y) - new Vector2(Movement.player.transform.position.x, Movement.player.transform.position.y);
 

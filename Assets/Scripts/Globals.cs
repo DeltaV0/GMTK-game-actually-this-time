@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
-    public Enemy[] enemies;
+    public List<Enemy> enemies = new List<Enemy>();
 
     public static Globals globals;
 
@@ -21,13 +21,14 @@ public class Globals : MonoBehaviour
     {
         level = PlayerPrefs.GetInt("Lvl");
         reloading = false;
-        
+        globals = this;
     }
 
     public void nextlevel(){
 
         PlayerPrefs.SetInt("Lvl", Mathf.Min(PlayerPrefs.GetInt("Lvl") + 1, points.Length - 1));
         level = PlayerPrefs.GetInt("Lvl");
+        Movement.player.transform.position = points[level].position;
     }
 
     public void prevlevel(){
@@ -38,7 +39,6 @@ public class Globals : MonoBehaviour
     }
     void Start()
     {
-        globals = this;
         Movement.player.transform.position = points[level].position;
     }
 

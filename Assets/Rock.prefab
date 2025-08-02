@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7198746694942424623}
   - component: {fileID: 6856144596739121716}
   - component: {fileID: 3083524425349532752}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4904,7 +4904,7 @@ GameObject:
   - component: {fileID: -1357878333954957797}
   - component: {fileID: 5090027188011767395}
   - component: {fileID: 8690016080629536257}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5004,7 +5004,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &7630507398712594524
 BoxCollider2D:

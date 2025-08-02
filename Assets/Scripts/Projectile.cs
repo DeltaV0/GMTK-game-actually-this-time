@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
         if(rb.velocity.magnitude < 2 && !done){
             done = true;
             noiseparts.Play();
-            for(int i = 0; i < Globals.globals.enemies.Length; i++){
+            for(int i = 0; i < Globals.globals.enemies.Count; i++){
                     aud.Play();
                     int lm2 = LayerMask.GetMask("Enemy", "Walls");
                     //Vector2 pointBetween = Vector2.Lerp(transform.position, hit.point, 0.95f);
