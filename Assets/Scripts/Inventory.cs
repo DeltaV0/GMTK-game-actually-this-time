@@ -25,10 +25,20 @@ public class Inventory : MonoBehaviour
     public static void AddItem(Collectible newCollectible)
     {
         playerCollectibles.Add(newCollectible);
-        playerItemObjects.Add(Instantiate(itemPrefab, inventoryTrans));
-        playerItemObjects[playerItemObjects.Count - 1].GetComponent<RawImage>().texture = newCollectible.collectibleImage;
-        playerItemObjects[playerItemObjects.Count - 1].GetComponent<RectTransform>().sizeDelta = size;
-        playerItemObjects[playerItemObjects.Count - 1].GetComponent<RectTransform>().position = firstPos + new Vector2((offset + size.y) * (playerItemObjects.Count - 1), 0);
+        GameObject newItem = Instantiate(itemPrefab, inventoryTrans);
+        playerItemObjects.Add(newItem);
+        newItem.GetComponent<RawImage>().texture = newCollectible.collectibleImage;
+        newItem.GetComponent<RawImage>().color = newCollectible.color;
+        Vector2 imageDimensions = new Vector2(newCollectible.collectibleImage.width, newCollectible.collectibleImage.height);
+        if(imageDimensions.x > imageDimensions.y)
+        {
+            newItem.GetComponent<RectTransform>().sizeDelta *= new Vector2(1, imageDimensions.y / imageDimensions.x);
+        }
+        else if (imageDimensions.y > imageDimensions.x)
+        {
+            newItem.GetComponent<RectTransform>().sizeDelta *= new Vector2(imageDimensions.x / imageDimensions.y, 1);
+        }
+        newItem.GetComponent<RectTransform>().position = firstPos + new Vector2((offset + size.y) * (playerItemObjects.Count - 1), 0);
     }
 
     public static void RemoveItem(Collectible itemToRemove)

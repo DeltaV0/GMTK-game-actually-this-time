@@ -26,13 +26,13 @@ public class Globals : MonoBehaviour
 
     public void nextlevel(){
 
-        PlayerPrefs.SetInt("Lvl", PlayerPrefs.GetInt("Lvl") + 1);
+        PlayerPrefs.SetInt("Lvl", Mathf.Min(PlayerPrefs.GetInt("Lvl") + 1, points.Length - 1));
         level = PlayerPrefs.GetInt("Lvl");
     }
 
     public void prevlevel(){
         
-        PlayerPrefs.SetInt("Lvl", PlayerPrefs.GetInt("Lvl") - 1);
+        PlayerPrefs.SetInt("Lvl", Mathf.Max(PlayerPrefs.GetInt("Lvl") - 1, 0));
         level = PlayerPrefs.GetInt("Lvl");
         Movement.player.transform.position = points[level].position;
     }
@@ -47,6 +47,10 @@ public class Globals : MonoBehaviour
     {
         if(Input.GetKeyDown("l")){
             prevlevel();
+        }
+        else if (Input.GetKeyDown("n"))
+        {
+            nextlevel();
         }
     }
 }
