@@ -12,10 +12,18 @@ public class DeathAnim : MonoBehaviour
 
 
     public string[] texts;
+
+    public bool deathanim;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        if(deathanim){
+       
+        } else {
+
+        }
+        text.text = "";
         StartCoroutine(anim());
     }
 
@@ -45,6 +53,8 @@ public class DeathAnim : MonoBehaviour
             line++;
             yield return new WaitForSeconds(0.5f);
         }
+
+        gameObject.SetActive(false);
 
     }
 }

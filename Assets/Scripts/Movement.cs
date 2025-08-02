@@ -48,6 +48,8 @@ public class Movement : MonoBehaviour
 
     public GameObject deathanim;
 
+    public GameObject dieparts;
+
     private void Awake()
     {
         player = this;
@@ -57,16 +59,19 @@ public class Movement : MonoBehaviour
         
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
+        
         Debug.Log(Time.timeScale );
     }
 
     public void Reset(){
+        body.velocity = new Vector2(0, 0);
         lives--;
         if(lives > 0){
+        GameObject bullet = (GameObject)Instantiate(dieparts, transform.position, transform.rotation);
         aud[0].Play();
         
         animator[0].SetTrigger("respawn");
-        transform.position = spawnpoint.position;
+        transform.position = Globals.globals.points[Globals.globals.level].position;
         }
         
     }
@@ -76,8 +81,21 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthCircle.fillAmount = (float)((float)lives/ 5f);
+        HealthCircle.fillAmount = (float)((float)lives/ 3f);
         text.text = lives + "";
+
+        if(Input.GetKeyDown("p")){
+            aud[2].Stop();
+            deathanim.SetActive(true);
+            Debug.Log(Time.timeScale );
+            Globals.globals.reloading = true;
+            //Time.fixedDeltaTime = 10000f;
+            lives--;
+           // Time.timeScale = 1f;
+            Invoke("reload", 6.5f);
+            //reload of out of lives (or loops ig)
+        }
+
         if(lives == 0){
             aud[2].Stop();
             deathanim.SetActive(true);

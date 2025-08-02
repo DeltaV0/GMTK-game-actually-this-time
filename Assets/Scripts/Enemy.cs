@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         } else {
             //i give up commenting lol
             if(!chasing){
-                movementupdatetimer = 100;
+                movementupdatetimer = 50;
                 if(sel < PatrolPoints.Length - 1){
                     sel++;
                 } else {

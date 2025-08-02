@@ -10,21 +10,43 @@ public class Globals : MonoBehaviour
 
     public bool reloading;
 
-    //public GameObject[] points;
+    public Transform[] points;
+
+    public int level;
+
+    public GameObject nextLevelAnim;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        level = PlayerPrefs.GetInt("Lvl");
         reloading = false;
+        
+    }
+
+    public void nextlevel(){
+
+        PlayerPrefs.SetInt("Lvl", PlayerPrefs.GetInt("Lvl") + 1);
+        level = PlayerPrefs.GetInt("Lvl");
+    }
+
+    public void prevlevel(){
+        
+        PlayerPrefs.SetInt("Lvl", PlayerPrefs.GetInt("Lvl") - 1);
+        level = PlayerPrefs.GetInt("Lvl");
+        Movement.player.transform.position = points[level].position;
     }
     void Start()
     {
         globals = this;
+        Movement.player.transform.position = points[level].position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown("l")){
+            prevlevel();
+        }
     }
 }

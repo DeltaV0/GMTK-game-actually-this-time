@@ -27,7 +27,7 @@ public class Trap : MonoBehaviour
 
     void FixedUpdate(){
         if(Cooldown > 0){
-        Cooldown--;
+        //Cooldown--;
         text.text = "X";
         } else{
         text.text = "!";
