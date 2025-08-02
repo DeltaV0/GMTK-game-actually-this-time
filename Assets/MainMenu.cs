@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     public GameObject[] gobj;
 
     public void load(){
-		Invoke("loadactually", 6f);
+		Invoke("loadactually", 6.5f);
         gobj[0].SetActive(true);
 	}
 
