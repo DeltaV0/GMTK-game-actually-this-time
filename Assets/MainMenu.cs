@@ -8,13 +8,17 @@ public class MainMenu : MonoBehaviour
 
     public GameObject[] gobj;
 
+    public AudioSource aud;
+
     public void load(){
-		Invoke("loadactually", 6.5f);
+        aud.Stop();
+		Invoke("loadactually", 7f);
         gobj[0].SetActive(true);
 	}
 
     public void newgame(){
-        Invoke("newactually", 11f);
+        aud.Stop();
+        Invoke("newactually", 12f);
         gobj[1].SetActive(true);
 	}
 

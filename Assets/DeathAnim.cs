@@ -20,11 +20,6 @@ public class DeathAnim : MonoBehaviour
 
     private void Awake()
     {
-        if(deathanim){
-       
-        } else {
-
-        }
         text.text = "";
         StartCoroutine(anim());
     }
