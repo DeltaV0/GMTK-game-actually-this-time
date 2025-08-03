@@ -16,6 +16,8 @@ public class DeathAnim : MonoBehaviour
     public bool deathanim;
 
     public int linesb4loading;
+
+    public GameObject objecttospawnwhendone;
     // Start is called before the first frame update
 
     private void Awake()
@@ -50,8 +52,10 @@ public class DeathAnim : MonoBehaviour
             line++;
             yield return new WaitForSeconds(0.5f);
         }
-
-        gameObject.SetActive(false);
+        if(objecttospawnwhendone != null){
+            objecttospawnwhendone.SetActive(true);
+        }
+        //gameObject.SetActive(false);
 
     }
 }

@@ -68,17 +68,27 @@ public class Button : MonoBehaviour
             }
             if(Input.GetKeyDown("e"))
             {
-                aud.Play();
+                
                 if(!winbutton){
                     if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
+                        aud.pitch = 1f;
+                        aud.Play();
                         toggle();
                         takeitem();
+                    } else {
+                        aud.pitch = 0.5f;
+                        aud.Play();
                     }
                 } else {
                     if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
+                        aud.pitch = 1f;
+                        aud.Play();
                         Invoke("toggle", 5f);
                         text.text = "";
                         StartCoroutine(Countdown());
+                    } else {
+                        aud.pitch = 0.5f;
+                        aud.Play();
                     }
                     
                 }

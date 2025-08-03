@@ -46,6 +46,7 @@ public class CollectibleObject : MonoBehaviour
     {
         if (col.gameObject.name == "Me rn :3")
         {
+            Movement.player.aud[4].Play();
             Inventory.AddItem(collectible);
             Destroy(gameObject);
         }

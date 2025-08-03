@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour
 
     public AudioSource aud;
 
+    public void menu(){
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
+
     public void load(){
         aud.Stop();
 		Invoke("loadactually", 7f);

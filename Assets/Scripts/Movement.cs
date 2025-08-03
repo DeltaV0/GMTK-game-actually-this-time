@@ -83,8 +83,22 @@ public class Movement : MonoBehaviour
     {
         HealthCircle.fillAmount = (float)((float)lives/ 3f);
         text.text = lives + "";
-
-        if(Input.GetKeyDown("p")){
+        if(Input.GetKeyDown("left shift")){
+            body.velocity = new Vector2(0, 0);
+            lives--;
+            if(lives > 0){
+            GameObject bullet = (GameObject)Instantiate(dieparts, transform.position, transform.rotation);
+            aud[0].Play();
+        
+            animator[0].SetTrigger("respawn");
+            transform.position = Globals.globals.points[Globals.globals.level].position;
+        }
+        }
+        if(Input.GetKeyDown("tab")){
+            aud[3].Play();
+            Globals.globals.points[Globals.globals.level].position = transform.position;
+        }
+        /*if(Input.GetKeyDown("p")){
             aud[2].Stop();
             deathanim.SetActive(true);
             Debug.Log(Time.timeScale );
@@ -94,7 +108,7 @@ public class Movement : MonoBehaviour
            // Time.timeScale = 1f;
             Invoke("reload", 6.5f);
             //reload of out of lives (or loops ig)
-        }
+        }*/
 
         if(lives == 0){
             aud[2].Stop();

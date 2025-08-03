@@ -15,6 +15,8 @@ public class AlertTrap : MonoBehaviour
     private AudioSource alertSound;
     private float active = -1;
 
+    public bool on;
+
 
     void Start()
     {
@@ -26,9 +28,16 @@ public class AlertTrap : MonoBehaviour
         edge.isTrigger = true;
         edge.edgeRadius = 0.125f;
     }
+    public void Activate(){
+        on = true;
+    } 
 
+    public void Deactivate(){
+        on = false;
+    }
     void FixedUpdate()
     {
+        if(on){
         lr.positionCount = 2;
         lr.SetPositions(new Vector3[] {emitter1.localPosition, emitter2.localPosition });
         edge.SetPoints(new List<Vector2> { emitter1.localPosition, emitter2.localPosition });
@@ -37,11 +46,12 @@ public class AlertTrap : MonoBehaviour
         {
             active--;
         }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (active < 0 && (triggerMask & (1 << col.gameObject.layer)) != 0)
+        if (active < 0 && (triggerMask & (1 << col.gameObject.layer)) != 0 && on)
         {
             foreach (Enemy enemy in Globals.globals.enemies)
             {

@@ -123,9 +123,11 @@ public class Inventory : MonoBehaviour
 
     public static void RemoveItem(string itemName)
     {
+        
         bool foundIt = false;
         for (int i = 0; i < playerCollectibles.Count; i++)
         {
+            Debug.Log(playerCollectibles[i].name);
             if (foundIt)
             {
                 Vector3 pos = playerItemObjects[i].GetComponent<RectTransform>().localPosition;

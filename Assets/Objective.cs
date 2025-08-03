@@ -7,13 +7,19 @@ public class Objective : MonoBehaviour
     public string nextlevelname;
     private bool complete = false;
 
+    public bool win;
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.name == "Me rn :3" && !complete){
+            if(!win){
             Globals.globals.reloading = true;
             Globals.globals.nextLevelAnim.SetActive(true);
             StartCoroutine(NextLevel());
             Movement.player.aud[2].Pause();
+            } else {
+                SceneManager.LoadSceneAsync("win"); 
+            }
         }
     }
 
