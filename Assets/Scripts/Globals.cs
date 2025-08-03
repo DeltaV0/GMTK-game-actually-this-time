@@ -41,16 +41,4 @@ public class Globals : MonoBehaviour
     {
         Movement.player.transform.position = points[level].position;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown("l")){
-            prevlevel();
-        }
-        else if (Input.GetKeyDown("n"))
-        {
-            nextlevel();
-        }
-    }
 }
