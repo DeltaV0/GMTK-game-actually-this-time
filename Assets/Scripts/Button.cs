@@ -21,6 +21,8 @@ public class Button : MonoBehaviour
 
     public TMP_Text text;
 
+    public Collectible itemtotake;
+
     IEnumerator Countdown(){
         text.text = "5";
         yield return new WaitForSeconds(1f);
@@ -33,6 +35,10 @@ public class Button : MonoBehaviour
         text.text = "1";
         yield return new WaitForSeconds(1f);
         text.text = "";
+    }
+
+    public void takeitem(){
+        Inventory.RemoveItem(itemtotake);
     }
 
     void toggle(){
@@ -63,11 +69,16 @@ public class Button : MonoBehaviour
             if(Input.GetKeyDown("e")){
                 aud.Play();
                 if(!winbutton){
+                    if(itemtotake.name.Equals("") || Inventory.LookForItem(itemtotake)){
                     toggle();
+                    }
                 } else {
+                    if(itemtotake.name.Equals("") || Inventory.LookForItem(itemtotake)){
                     Invoke("toggle", 5f);
                     text.text = "";
                     StartCoroutine(Countdown());
+                    }
+                    
                 }
             }
         } else {

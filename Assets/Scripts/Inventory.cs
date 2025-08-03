@@ -21,6 +21,39 @@ public class Inventory : MonoBehaviour
         inventoryTrans = transform;
         itemPrefab = itemPrefabPlease;
     }
+    public void remove(Collectible itemToRemove){
+        //duplicate so buttons can access
+        bool foundIt = false;
+        for(int i = 0; i < playerCollectibles.Count; i++)
+        {
+            if(foundIt)
+            {
+                Vector3 pos = playerItemObjects[i].GetComponent<RectTransform>().localPosition;
+                playerItemObjects[i].GetComponent<RectTransform>().localPosition = new Vector3(pos.x, pos.y - size.y - offset, pos.z);
+            }
+            else if(playerCollectibles[i] == itemToRemove)
+            {
+                foundIt = true;
+                Destroy(playerItemObjects[i]);
+                playerItemObjects.RemoveAt(i);
+                playerCollectibles.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
+    public static bool LookForItem(Collectible itemToFind){
+        bool foundIt = false;
+        for(int i = 0; i < playerCollectibles.Count; i++)
+        {
+           if(playerCollectibles[i] == itemToFind)
+            {
+                foundIt = true;
+                break;
+            }
+        }
+        return foundIt;
+    }
 
     public static void AddItem(Collectible newCollectible)
     {
@@ -38,7 +71,9 @@ public class Inventory : MonoBehaviour
         {
             newItem.GetComponent<RectTransform>().sizeDelta *= new Vector2(imageDimensions.x / imageDimensions.y, 1);
         }
-        newItem.GetComponent<RectTransform>().position = firstPos + new Vector2((offset + size.y) * (playerItemObjects.Count - 1), 0);
+        Debug.Log(size.y);
+        Debug.Log(firstPos);
+        newItem.GetComponent<RectTransform>().anchoredPosition = (firstPos + new Vector2((offset + size.y) * (playerItemObjects.Count - 1), 0));
     }
 
     public static void RemoveItem(Collectible itemToRemove)
