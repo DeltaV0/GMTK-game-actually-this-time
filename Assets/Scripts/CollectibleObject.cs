@@ -13,6 +13,14 @@ public class Collectible
         this.name = name;
         this.color = color;
     }
+
+    public bool Equals(Collectible c)
+    {
+        Debug.Log(collectibleImage.ToString() + (collectibleImage.Equals(c.collectibleImage) ? " is equal to " : " is not equal to ") + c.collectibleImage.ToString());
+        Debug.Log(name.ToString() + (name.Equals(c.name) ? " is equal to " : " is not equal to ") + c.name.ToString());
+        Debug.Log(color.ToString() + (color.Equals(c.color) ? " is equal to " : " is not equal to ") + c.color.ToString());
+        return collectibleImage.Equals(c.collectibleImage) && name.Equals(c.name) && color.Equals(c.color);
+    }
 }
 
 [RequireComponent(typeof(SpriteRenderer))]

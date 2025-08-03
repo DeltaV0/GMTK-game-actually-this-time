@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
 
     public static Transform inventoryTrans;
     public static List<Collectible> playerCollectibles = new List<Collectible>();
+    public List<Collectible> itemCollectibles = new List<Collectible>();
     private static List<GameObject> playerItemObjects = new List<GameObject>();
     public static GameObject itemPrefab;
     public static float offset = 50;
@@ -21,6 +22,12 @@ public class Inventory : MonoBehaviour
         inventoryTrans = transform;
         itemPrefab = itemPrefabPlease;
     }
+
+    private void Update()
+    {
+        itemCollectibles = playerCollectibles;
+    }
+
     public void remove(Collectible itemToRemove){
         //duplicate so buttons can access
         bool foundIt = false;
@@ -54,6 +61,18 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    public static int GetItem(Collectible collectibleToTake)
+    {
+        for (int i = 0; i < playerCollectibles.Count; i++)
+        {
+            if (playerCollectibles[i].Equals(collectibleToTake))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static void AddItem(Collectible newCollectible)
     {
         playerCollectibles.Add(newCollectible);
@@ -77,6 +96,7 @@ public class Inventory : MonoBehaviour
 
     public static void RemoveItem(Collectible itemToRemove)
     {
+        Debug.Log("Attempting to remove " + itemToRemove.name);
         bool foundIt = false;
         for(int i = 0; i < playerCollectibles.Count; i++)
         {
@@ -85,7 +105,33 @@ public class Inventory : MonoBehaviour
                 Vector3 pos = playerItemObjects[i].GetComponent<RectTransform>().localPosition;
                 playerItemObjects[i].GetComponent<RectTransform>().localPosition = new Vector3(pos.x, pos.y - size.y - offset, pos.z);
             }
-            else if(playerCollectibles[i] == itemToRemove)
+            else if(playerCollectibles[i].Equals(itemToRemove))
+            {
+                foundIt = true;
+                Debug.Log("Found " + itemToRemove.name);
+                Destroy(playerItemObjects[i]);
+                playerItemObjects.RemoveAt(i);
+                playerCollectibles.RemoveAt(i);
+                i--;
+            }
+            else
+            {
+                Debug.Log(playerCollectibles[i].name + " is not " + itemToRemove.name);
+            }
+        }
+    }
+
+    public static void RemoveItem(string itemName)
+    {
+        bool foundIt = false;
+        for (int i = 0; i < playerCollectibles.Count; i++)
+        {
+            if (foundIt)
+            {
+                Vector3 pos = playerItemObjects[i].GetComponent<RectTransform>().localPosition;
+                playerItemObjects[i].GetComponent<RectTransform>().localPosition = new Vector3(pos.x, pos.y - size.y - offset, pos.z);
+            }
+            else if (playerCollectibles[i].name.Equals(itemName))
             {
                 foundIt = true;
                 Destroy(playerItemObjects[i]);

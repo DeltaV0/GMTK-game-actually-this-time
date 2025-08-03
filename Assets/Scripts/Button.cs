@@ -38,7 +38,7 @@ public class Button : MonoBehaviour
     }
 
     public void takeitem(){
-        Inventory.RemoveItem(itemtotake);
+        Inventory.RemoveItem(itemtotake.name);
     }
 
     void toggle(){
@@ -66,17 +66,19 @@ public class Button : MonoBehaviour
                 //activate current text
                 clickableTexts[currentClick].SetActive(true);
             }
-            if(Input.GetKeyDown("e")){
+            if(Input.GetKeyDown("e"))
+            {
                 aud.Play();
                 if(!winbutton){
                     if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
-                    toggle();
+                        toggle();
+                        takeitem();
                     }
                 } else {
                     if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
-                    Invoke("toggle", 5f);
-                    text.text = "";
-                    StartCoroutine(Countdown());
+                        Invoke("toggle", 5f);
+                        text.text = "";
+                        StartCoroutine(Countdown());
                     }
                     
                 }
