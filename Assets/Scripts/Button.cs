@@ -83,6 +83,7 @@ public class Button : MonoBehaviour
                     if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
                         aud.pitch = 1f;
                         aud.Play();
+                        takeitem();
                         Invoke("toggle", 5f);
                         text.text = "";
                         StartCoroutine(Countdown());
