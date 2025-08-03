@@ -69494,10 +69494,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5152738825d2534d8f792a0ff971163, type: 2}
-  m_sharedMaterial: {fileID: -6642136584208800889, guid: a3caae55e7809c04ea1802b91bc0e37e, type: 2}
+  m_sharedMaterial: {fileID: -6642136584208800889, guid: f5152738825d2534d8f792a0ff971163, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -69560,7 +69562,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2119265722

@@ -42,17 +42,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public static bool LookForItem(Collectible itemToFind){
-        bool foundIt = false;
-        for(int i = 0; i < playerCollectibles.Count; i++)
+    public static int GetItem(string itemName)
+    {
+        for (int i = 0; i < playerCollectibles.Count; i++)
         {
-           if(playerCollectibles[i] == itemToFind)
+            if(playerCollectibles[i].name.Equals(itemName))
             {
-                foundIt = true;
-                break;
+                return i;
             }
         }
-        return foundIt;
+        return -1;
     }
 
     public static void AddItem(Collectible newCollectible)

@@ -69,11 +69,11 @@ public class Button : MonoBehaviour
             if(Input.GetKeyDown("e")){
                 aud.Play();
                 if(!winbutton){
-                    if(itemtotake.name.Equals("") || Inventory.LookForItem(itemtotake)){
+                    if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
                     toggle();
                     }
                 } else {
-                    if(itemtotake.name.Equals("") || Inventory.LookForItem(itemtotake)){
+                    if(itemtotake.name.Equals("") || Inventory.GetItem(itemtotake.name) >= 0){
                     Invoke("toggle", 5f);
                     text.text = "";
                     StartCoroutine(Countdown());
